@@ -494,6 +494,8 @@ func (bc *BlockChainFake) startWorker(
 		// epoch is fully notarized before creating new blocks.
 		if s.S == 1 && !parent.GetBlockSn().IsGenesis() {
 			bc.mutex.Lock()
+			// This is just test, there is no notrarizations in notasInBlocks or notasInMemory for number in
+			// [parent.mun -k , parent.num] actually
 			notas = bc.getNotarizations(parent, int(bc.k))
 			canCreate = notas != nil
 			if !canCreate {
@@ -508,6 +510,8 @@ func (bc *BlockChainFake) startWorker(
 			bc.mutex.Lock()
 			// Allow up to k unnotarized blocks.
 			ns := BlockSn{epoch, s.S - bc.k}
+			// This is just test, there is no notrarizations in notasInBlocks or notasInMemory for number ns.number
+			// actually
 			n := bc.getNotarization(ns)
 			if n != nil {
 				notas = append(notas, n)
